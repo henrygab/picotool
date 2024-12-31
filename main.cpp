@@ -4363,8 +4363,18 @@ bool erase_command::execute(device_map &devices) {
         if (settings.load.partition >= partitions->size()) {
             fail(ERROR_NOT_POSSIBLE, "There are only %d partitions on the device", partitions->size());
         }
-        start = std::get<0>((*partitions)[settings.load.partition]);
-        end = std::get<1>((*partitions)[settings.load.partition]);
+        size_t tmp;
+        tmp = std::get<0>((*partitions)[settings.load.partition]);
+        if (tmp > UINT32_MAX) {
+            fail(ERROR_NOT_POSSIBLE, "Partition start address is too large");
+        }
+        start = tmp;
+        tmp = std::get<1>((*partitions)[settings.load.partition]);
+        if (tmp > UINT32_MAX) {
+            fail(ERROR_NOT_POSSIBLE, "Partition end address is too large");
+        }
+        end = tmp;
+
         printf("Erasing partition %d:\n", settings.load.partition);
         printf("  %08x->%08x\n", start, end);
         start += FLASH_START;
