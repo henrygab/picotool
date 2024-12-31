@@ -3050,7 +3050,7 @@ void info_guts(memory_access &raw_access, void *con) {
                 unpartitioned << ", uf2 { " << cli::join(family_ids, ", ") << " }";
                 info_pair("un-partitioned space", unpartitioned.str());
 
-                for (int i=0; i < partition_table->partitions.size(); i++) {
+                for (size_t i=0; i < partition_table->partitions.size(); i++) {
                     std::stringstream pstring;
                     std::stringstream pname;
                     auto partition = partition_table->partitions[i];
