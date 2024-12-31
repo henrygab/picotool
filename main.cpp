@@ -5991,7 +5991,7 @@ bool partition_create_command::execute(device_map &devices) {
         cur_pos = start + size;
     #if SUPPORT_A2
         if (start <= (settings.uf2.abs_block_loc - FLASH_START)/0x1000 && start + size > (settings.uf2.abs_block_loc - FLASH_START)/0x1000) {
-            fail(ERROR_INCOMPATIBLE, "The address %lx cannot be in a partition for the RP2350-E10 fix to work", settings.uf2.abs_block_loc);
+            fail(ERROR_INCOMPATIBLE, "The address %" PRIx32 " cannot be in a partition for the RP2350-E10 fix to work", settings.uf2.abs_block_loc);
         }
     #endif
         new_p.first_sector = start;
