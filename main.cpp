@@ -5415,7 +5415,7 @@ bool get_mask(const std::string& sel, uint32_t &mask, int max_bit) {
         bool ok = get_int(sel.substr(0, dash), from) &&
                   get_int(sel.substr(dash+1), to);
         if (!ok || to < from || from < 0 || to >= max_bit) {
-            fail(ERROR_ARGS, "Invalid bit-range in selector: %s; expect 'm-n' where m >= 0, n >= m and n <= %d", max_bit-1);
+            fail(ERROR_ARGS, "Invalid bit-range in selector: %s; expect 'm-n' where m >= 0, n >= m and n <= %d", sel.c_str, max_bit-1);
         }
         mask = (2u << to) - (1u << from);
         return true;
